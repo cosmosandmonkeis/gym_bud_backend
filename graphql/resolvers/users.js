@@ -7,7 +7,6 @@ const SECRET_KEY = process.env.SECRET_KEY
 const User = require('../models/User')
 const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
 
-const AppointmentBooking = require('../models/AppointmentBooking')
 
 function getToken(user) {
     return jwt.sign({

@@ -1,12 +1,9 @@
-const { model, Schema } = require('mongoose')
+const {model, Schema} = require('mongoose')
 
-const serviceSchema = new Schema({
-    title: String,
-    price: Number,
-    description: String,
-    category: String,
-    date: String,
-
+const preferenceSchema = new Schema({
+    genderPreference: String,
+    goalPreference: String,
+    frequencyPreference: Number,
 })
 
-module.exports = model('services', serviceSchema)
+module.exports = model('preferences', preferenceSchema)

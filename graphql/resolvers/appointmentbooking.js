@@ -1,4 +1,3 @@
-const Appointment = require('../models/AppointmentBooking')
 const checkAuth = require('../../utils/checkAuth')
 const User = require('../models/User')
 const {validateAppointmentInput} = require("../../utils/validators");

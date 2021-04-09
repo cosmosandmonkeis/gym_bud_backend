@@ -6,13 +6,16 @@ const userSchema = new Schema({
     email: String,
     createdAt: String,
     admin: Boolean,
-    bookingsHistory: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'appointments'
-        }
-    ],
     phonenumber: String,
+    signedUserAgreement : Boolean,
+    city: String,
+    timeAvailability: String,
+    gymName: String,
+    preferences: {
+        type: Schema.Types.ObjectId,
+        ref: 'preferences'
+    }
+
 })
 
 module.exports = model('users', userSchema)
