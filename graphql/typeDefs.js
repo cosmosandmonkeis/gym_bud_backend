@@ -18,8 +18,6 @@ module.exports = gql`
         email: String
         phonenumber: String
         createdAt: String
-        #        did user sign agreement or not
-        signedUserAgreement: Boolean
         #        what city user is in
         city: String
         #        morning, noon, afternoon, evening, night, latenight
@@ -39,18 +37,38 @@ module.exports = gql`
         phonenumber: String
     }
 
+    input ExtraFieldinputs {
+        username: String
+        city: String
+        timeAvailability: String
+        gymName: String
+    }
+
+    input PreferenceInput {
+        genderPreference: String
+        goalPreference: String
+        frequencyPreference: Int
+    }
+
     input inputID {
         id: ID!
     }
 
     type Query {
+        #        User Queries
         getUsers: [User]
         getAUser(username: String!) : User
+        #        Preference Queries
+        getPreferences: Preference
     }
 
     type Mutation {
+        #        User Mutation
         login(username: String!, password: String!): User
         register(registerInput: RegisterInput): User
+        setExtraUserFields(extraFields: ExtraFieldinputs) : User
+        #        Preference Mutation
+        setPreferences(preferenceInput: PreferenceInput) : Preference
     }
 
     type Subscription {

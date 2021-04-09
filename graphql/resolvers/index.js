@@ -1,10 +1,10 @@
-const serviceResolvers = require('./services')
+const serviceResolvers = require('./preferences')
 const usersResolvers = require('./users')
 const appointmentbookingResolvers = require('./appointmentbooking')
 
 module.exports = {
     User: {
-        ...usersResolvers.User,
+        ...usersResolvers.Preference,
     },
     Query: {
         ...serviceResolvers.Query,

@@ -1,4 +1,4 @@
-const Services = require('../models/Preference')
+const Preferences = require('../models/Preference')
 const User = require('../models/User')
 const checkAuth = require('../../utils/checkAuth')
 
@@ -19,7 +19,7 @@ module.exports = {
         * NoInput -> Sorted Array by price of Service objects*/
         async getServices() {
             try {
-                return await Services.find().sort({price: 1})
+                return await Preferences.find().sort({price: 1})
             } catch (err) {
                 throw new Error(`Cannot grab any services.`)
             }
@@ -29,7 +29,7 @@ module.exports = {
         * serviceid(string) -> Service */
         async getAService(_, {serviceID}) {
             try {
-                return await Services.findById(serviceID)
+                return await Preferences.findById(serviceID)
             } catch (err) {
                 throw new Error(`Cannot find service with id: ${serviceID}.`)
             }
@@ -39,7 +39,7 @@ module.exports = {
         * */
         async getServiceCategory(_, {category}) {
             try {
-                return await Services.find({category: category})
+                return await Preferences.find({category: category})
             } catch (err) {
                 throw new Error(`Cannot find services with category: ${category}`)
             }
@@ -59,12 +59,12 @@ module.exports = {
             if (databaseUser.admin === false)
                 throw new Error('User does not have required privileges')
 
-            const titleAlreadyInsideService = await Services.findOne({title: title})
+            const titleAlreadyInsideService = await Preferences.findOne({title: title})
             if (titleAlreadyInsideService != null)
                 return new Error(`Service with title: '${title}' already exists.`)
 
             try {
-                const service = new Services({
+                const service = new Preferences({
                     title,
                     price,
                     description,
@@ -86,7 +86,7 @@ module.exports = {
                 throw new Error('User does not have required privileges')
 
             try {
-                return await Services.findByIdAndDelete(serviceID)
+                return await Preferences.findByIdAndDelete(serviceID)
             } catch (err) {
                 throw new Error(err)
             }

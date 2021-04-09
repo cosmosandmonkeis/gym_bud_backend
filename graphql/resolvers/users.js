@@ -16,21 +16,8 @@ function getToken(user) {
     }, SECRET_KEY, {expiresIn: '1hr'});
 }
 
-/*
-* Special Datatype: User
-* holds users and contains fields below
-*
-    token: String
-    admin: Boolean
-    username: String
-    email: String
-    phonenumber: String
-    bookingsHistory : [AppointmentBooking] => holds a list of all appointments made by user
-    createdAt: String => when this user was created
-    * */
-
 module.exports = {
-    User: {
+    Preference: {
         bookingsHistory: async (parent) => {
 
             try {
@@ -56,24 +43,6 @@ module.exports = {
                 throw new Error(err)
             }
         },
-        /* a resolver to return the bookings history of a user given
-        *  a username (String)
-        *  String ->  Array of AppointmentBookings
-        * */
-        async getUserBookingsHistory(_, {username}) {
-            try {
-                const user = await User.findOne({username})
-
-                const ids = user.bookingsHistory
-                return await AppointmentBooking.find({
-                    '_id': {
-                        $in: ids
-                    }
-                })
-            } catch (err) {
-                throw new Error(err)
-            }
-        },
         /* a resolver to return a user object given username
         *  a username (String)
         *  String ->  User
@@ -85,7 +54,8 @@ module.exports = {
             } catch (err) {
                 throw new UserInputError('User not found')
             }
-        }
+        },
+
     }
     ,
     Mutation: {
@@ -160,6 +130,23 @@ module.exports = {
                 id: res._id,
                 token
             }
+        },
+        async setExtraUserFields(_, {extraFields: {username, city, timeAvailability, gymName}}) {
+            const user = await User.findOne({username})
+            if (!user) {
+                throw new UserInputError('User not found')
+            }
+            try {
+                return await User.updateOne({username}, {
+                    city: city,
+                    timeAvailability: timeAvailability,
+                    gymName: gymName
+                })
+            } catch (err) {
+                throw new Error(err)
+            }
+
+
         }
     }
 }
