@@ -1,4 +1,4 @@
-const Services = require('../models/Services')
+const Services = require('../models/Preference')
 const User = require('../models/User')
 const checkAuth = require('../../utils/checkAuth')
 
