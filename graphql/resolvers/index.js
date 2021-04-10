@@ -1,24 +1,17 @@
-const serviceResolvers = require('./preferences')
+const preferenceResolvers = require('./preferences')
 const usersResolvers = require('./users')
-const appointmentbookingResolvers = require('./appointmentbooking')
 
 module.exports = {
     User: {
         ...usersResolvers.Preference,
     },
     Query: {
-        ...serviceResolvers.Query,
+        ...preferenceResolvers.Query,
         ...usersResolvers.Query,
-        ...appointmentbookingResolvers.Query
     },
     Mutation: {
-        ...serviceResolvers.Mutation,
+        ...preferenceResolvers.Mutation,
         ...usersResolvers.Mutation,
-        ...appointmentbookingResolvers.Mutation
     },
-    Subscription: {
-        ...appointmentbookingResolvers.Subscription,
-
-    }
 
 }

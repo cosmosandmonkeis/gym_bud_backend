@@ -45,6 +45,7 @@ module.exports = gql`
     }
 
     input PreferenceInput {
+        userid: ID!
         genderPreference: String
         goalPreference: String
         frequencyPreference: Int
@@ -59,7 +60,7 @@ module.exports = gql`
         getUsers: [User]
         getAUser(username: String!) : User
         #        Preference Queries
-        getPreferences: Preference
+        getAUsersPreferences(userid: ID!): Preference
     }
 
     type Mutation {
@@ -68,10 +69,6 @@ module.exports = gql`
         register(registerInput: RegisterInput): User
         setExtraUserFields(extraFields: ExtraFieldinputs) : User
         #        Preference Mutation
-        setPreferences(preferenceInput: PreferenceInput) : Preference
-    }
-
-    type Subscription {
-        #        newBookings: AppointmentBooking
+        setAUsersPreferences(preferenceInput: PreferenceInput) : Preference
     }
 `

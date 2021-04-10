@@ -18,20 +18,6 @@ function getToken(user) {
 
 module.exports = {
     Preference: {
-        bookingsHistory: async (parent) => {
-
-            try {
-
-                const ids = parent.bookingsHistory
-                return await AppointmentBooking.find({
-                    '_id': {
-                        $in: ids
-                    }
-                })
-            } catch (err) {
-                throw new Error(err)
-            }
-        },
     },
     Query: {
         /* a resolver to return all users in mongodb
