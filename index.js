@@ -17,6 +17,7 @@ const server = new ApolloServer({
         return {req, pubsub}
     }
 })
+mongoose.set('useFindAndModify', false);
 mongoose.connect(MONGO_DB, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(
         () => {
