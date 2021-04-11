@@ -13,13 +13,13 @@ module.exports = {
         },
     },
     Mutation: {
-        async setAUsersPreferences(_, {preferenceInput}) {
+        async setAUsersPreferences(_, {preferenceInput: {genderPreference, goalPreference, frequencyPreference}}) {
             try {
 
                 const preference = new Preferences({
-                    genderPreference: preferenceInput.genderPreference,
-                    goalPreference: preferenceInput.goalPreference,
-                    frequencyPreference: preferenceInput.frequencyPreference
+                    genderPreference: genderPreference,
+                    goalPreference: goalPreference,
+                    frequencyPreference: frequencyPreference
                 })
                 await preference.save()
                 return await User.findByIdAndUpdate({_id: preferenceInput.userid}, {
