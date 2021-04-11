@@ -5,6 +5,7 @@ const {UserInputError} = require('apollo-server')
 const SECRET_KEY = process.env.SECRET_KEY
 
 const User = require('../models/User')
+const Preference = require('../models/Preference')
 
 const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
 
@@ -19,18 +20,14 @@ function getToken(user) {
 
 module.exports = {
     Preference: {
-        // Preference: async (parent) => {
-        //     try {
-        //         const ids = parent.Preference
-        //         return await Preference.find({
-        //             '_id': {
-        //                 $in: ids
-        //             }
-        //         })
-        //     } catch (err) {
-        //         throw new Error(err)
-        //     }
-        // }
+        preferences: async (parent) => {
+            try {
+                const preferenceID = parent.preferences
+                return await Preference.findById(preferenceID)
+            } catch (err) {
+                throw new Error(err)
+            }
+        }
     },
     Query: {
         /* a resolver to return all users in mongodb
