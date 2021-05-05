@@ -19,16 +19,6 @@ function getToken(user) {
 }
 
 module.exports = {
-    Preference: {
-        preferences: async (parent) => {
-            try {
-                const preferenceID = parent.preferences
-                return await Preference.findById(preferenceID)
-            } catch (err) {
-                throw new Error(err)
-            }
-        }
-    },
     Query: {
         /* a resolver to return all users in mongodb
         * NoInput -> Array of Users */
