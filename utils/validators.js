@@ -42,35 +42,3 @@ module.exports.validateLoginInput = (username, password) => {
         valid: Object.keys(errors).length < 1
     };
 }
-
-module.exports.validateAppointmentInput = (description, dateString) => {
-
-    const errors = {}
-    /*
-    * errors takes shape of
-    * description: string
-    * dateString: string
-    * */
-
-    if (description.trim() === '') {
-        errors.description = 'Description must not be empty';
-    }
-
-    const illegal_chars = ['<', '>', '[', ']']
-
-    illegal_chars.forEach(char => {
-        if (description.includes(char)) {
-            errors.description = `Description may not contain illegal characters.
-             Last illegal character detected: ${char}`
-        }
-        if (dateString.includes(char)) {
-            errors.dateString = `Date String may not contain illegal characters.
-             Last illegal character detected: ${char}`
-        }
-    })
-
-    return {
-        errors,
-        valid: Object.keys(errors).length < 1
-    }
-}
