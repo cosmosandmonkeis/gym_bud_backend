@@ -38,7 +38,7 @@ module.exports = gql`
         gymName: String
         genderPreference: String
         goalPreference: String
-        frequencyPreference: String
+        frequencyPreference: Int
     }
 
     type Query {
