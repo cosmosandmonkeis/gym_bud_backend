@@ -5,7 +5,7 @@ const {UserInputError} = require('apollo-server')
 const SECRET_KEY = process.env.SECRET_KEY
 
 const User = require('../models/User')
-const Preference = require('../models/Preference')
+
 
 const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
 
@@ -117,22 +117,18 @@ module.exports = {
                 token
             }
         },
-        async setExtraUserFields(_, {extraFields: {userid, city, timeAvailability, gymName}}) {
+        async setExtraUserFields(_, {extraFields: {userid, timeAvailability, gymName, genderPreference, goalPreference, frequencyPreference}}) {
             const user = await User.findById(userid)
             if (!user) {
                 throw new UserInputError('User not found')
             }
             try {
                 return await User.updateOne({_id: userid}, {
-                    city: city,
-                    timeAvailability: timeAvailability,
-                    gymName: gymName
+
                 })
             } catch (err) {
                 throw new Error(err)
             }
-
-
         }
     }
 }
