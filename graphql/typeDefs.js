@@ -4,9 +4,10 @@ module.exports = gql`
 
     type User {
         id: ID
-        createdAt: String
         token: String
         admin: Boolean
+        createdAt: String
+        verified: Boolean
         username: String
         phonenumber: String
         #        need calpoly email 

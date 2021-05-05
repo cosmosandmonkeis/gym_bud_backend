@@ -1,16 +1,18 @@
 const {model, Schema} = require('mongoose')
 
 const userSchema = new Schema({
+    admin: Boolean,
     createdAt: String,
+    verified: Boolean,
     username: String,
     password: String,
-    email: String,
-    admin: Boolean,
     phonenumber: String,
-    signedUserAgreement : Boolean,
-    city: String,
+    email: String,
     timeAvailability: String,
     gymName: String,
+    genderPreference: String,
+    goalPreference: String,
+    frequencyPreference: Number
 
 })
 
