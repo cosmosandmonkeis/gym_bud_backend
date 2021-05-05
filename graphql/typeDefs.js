@@ -4,13 +4,13 @@ module.exports = gql`
 
     type User {
         id: ID
+        createdAt: String
         token: String
         admin: Boolean
         username: String
+        phonenumber: String
         #        need calpoly email 
         email: String
-        phonenumber: String
-        createdAt: String
         #        morning, noon, afternoon, evening, night, latenight
         timeAvailability: String
         #        example: Calpoly Rec Center or some other slo gym
@@ -22,9 +22,7 @@ module.exports = gql`
         #        how many times a week is the user looking to go to the gym
         frequencyPreference: Int
     }
-
-
-
+    
     input RegisterInput {
         username: String
         password: String
@@ -40,10 +38,6 @@ module.exports = gql`
         genderPreference: String
         goalPreference: String
         frequencyPreference: String
-    }
-
-    input inputID {
-        id: ID!
     }
 
     type Query {
