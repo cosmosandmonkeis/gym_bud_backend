@@ -124,7 +124,11 @@ module.exports = {
             }
             try {
                 return await User.updateOne({_id: userid}, {
-
+                    timeAvailability: timeAvailability,
+                    gymName: gymName,
+                    genderPreference: genderPreference,
+                    goalPreference: goalPreference,
+                    frequencyPreference: frequencyPreference
                 })
             } catch (err) {
                 throw new Error(err)
