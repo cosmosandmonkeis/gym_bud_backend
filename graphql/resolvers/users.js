@@ -123,7 +123,7 @@ module.exports = {
                 throw new UserInputError('User not found')
             }
             try {
-                return await User.updateOne({_id: userid}, {
+                return await User.updateOne({username}, {
                     timeAvailability: timeAvailability,
                     gymName: gymName,
                     genderPreference: genderPreference,
