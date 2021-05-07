@@ -117,8 +117,8 @@ module.exports = {
                 token
             }
         },
-        async setExtraUserFields(_, {extraFields: {userid, timeAvailability, gymName, genderPreference, goalPreference, frequencyPreference}}) {
-            const user = await User.findById(userid)
+        async setExtraUserFields(_, {extraFields: {username, timeAvailability, gymName, genderPreference, goalPreference, frequencyPreference}}) {
+            const user = await User.findOne({username})
             if (!user) {
                 throw new UserInputError('User not found')
             }

@@ -33,7 +33,7 @@ module.exports = gql`
     }
 
     input ExtraFieldinputs {
-        userid: ID!
+        username: String
         timeAvailability: String
         gymName: String
         genderPreference: String
