@@ -129,9 +129,9 @@ module.exports = {
                 from: 'gymbud_admin@zohomail.com', // Change to your verified sender
                 subject: 'Email Verification for Gym Bud!',
                 text: `Click the link below to verify your Calpoly email address!
-                        link: http://${req.headers.host}/verify?token=${emailToken}`,
+                        link: http://${req.headers.host}/verify/${emailToken}`,
                 html: '<strong>and easy to do anywhere, even with Node.js</strong>' +
-                    `<a href="http://${req.headers.host}/verify?token=${emailToken}">Verify</a>`,
+                    `<a href="http://${req.headers.host}/verify/${emailToken}">Verify</a>`,
             }
 
             await sgMail
