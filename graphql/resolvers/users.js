@@ -2,10 +2,12 @@ require('dotenv').config()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {UserInputError} = require('apollo-server')
+const sgMail = require('@sendgrid/mail')
+
 const SECRET_KEY = process.env.SECRET_KEY
-
+const EMAIL_KEY = process.env.EMAIL_VER_KEY
 const User = require('../models/User')
-
+sgMail.setApiKey(EMAIL_KEY)
 
 const {validateRegisterInput, validateLoginInput} = require('../../utils/validators')
 
@@ -110,6 +112,23 @@ module.exports = {
             const res = await newUser.save()
 
             const token = getToken(res)
+
+            // sending verification email
+            const msg = {
+                to: email, // Change to your recipient
+                from: 'gymbud_admin@zohomail.com', // Change to your verified sender
+                subject: 'Email Verification for Gym Bud!',
+                text: 'Click the link below to verify your Calpoly email address!',
+                html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+            }
+            sgMail
+                .send(msg)
+                .then(() => {
+                    console.log('Email sent')
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
 
             return {
                 ...res._doc,
