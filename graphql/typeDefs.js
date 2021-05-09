@@ -5,6 +5,7 @@ module.exports = gql`
     type User {
         id: ID
         token: String
+        emailToken: String
         admin: Boolean
         createdAt: String
         verified: Boolean

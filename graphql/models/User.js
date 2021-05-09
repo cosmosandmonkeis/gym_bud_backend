@@ -4,6 +4,7 @@ const userSchema = new Schema({
     admin: Boolean,
     createdAt: String,
     verified: Boolean,
+    emailToken: String,
     username: String,
     password: String,
     phonenumber: String,
