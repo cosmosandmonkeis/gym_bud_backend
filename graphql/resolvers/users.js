@@ -116,6 +116,7 @@ module.exports = {
                 createdAt: new Date().toISOString(),
                 admin: false,
                 phonenumber: phonenumber,
+                verified: false,
                 emailToken: emailToken
             })
 
@@ -175,6 +176,20 @@ module.exports = {
             } catch (err) {
                 throw new Error(err)
             }
+        },
+        async confirmEmail(_, {token}) {
+            try {
+                const verified = jwt.verify(token, EMAIL_SECRET)
+                await User.findOneAndUpdate({username: verified.username}, {
+                    $set: {
+                        verified: true
+                    }
+                })
+                return true
+            } catch (err) {
+                return false
+            }
+
         }
     }
 }
