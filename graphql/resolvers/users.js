@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {UserInputError} = require('apollo-server')
 const sgMail = require('@sendgrid/mail')
+const crypto  = require('crypto')
 
 const SECRET_KEY = process.env.SECRET_KEY
 const EMAIL_KEY = process.env.EMAIL_VER_KEY
@@ -107,6 +108,7 @@ module.exports = {
                 createdAt: new Date().toISOString(),
                 admin: false,
                 phonenumber: phonenumber,
+                emailToken: crypto.randomBytes(64).toString('hex')
             })
 
             const res = await newUser.save()
@@ -118,7 +120,7 @@ module.exports = {
                 to: email, // Change to your recipient
                 from: 'gymbud_admin@zohomail.com', // Change to your verified sender
                 subject: 'Email Verification for Gym Bud!',
-                text: 'Click the link below to verify your Calpoly email address!',
+                text: `Click the link below to verify your Calpoly email address!`,
                 html: '<strong>and easy to do anywhere, even with Node.js</strong>',
             }
             sgMail
