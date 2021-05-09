@@ -14,7 +14,7 @@ module.exports = gql`
         email: String
         #        morning, noon, afternoon, evening, night, latenight
         timeAvailability: String
-        #        example: Calpoly Rec Center or some other slo gym
+        #        example: Calpoly Rec Center 
         gymName: String
         #        Male, Female, or No Preference
         genderPreference: String
