@@ -54,5 +54,6 @@ module.exports = gql`
         register(registerInput: RegisterInput): User
         #        set other user var
         setExtraUserFields(extraFields: ExtraFieldinputs) : User
+        confirmEmail(token: String): Boolean
     }
 `
