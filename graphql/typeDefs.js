@@ -24,7 +24,13 @@ module.exports = gql`
         #        how many times a week is the user looking to go to the gym
         frequencyPreference: Int
     }
-    
+
+    type Chat {
+        id: ID
+        from: String!
+        message: String!
+    }
+
     input RegisterInput {
         username: String
         password: String
@@ -46,6 +52,8 @@ module.exports = gql`
         #        User Queries
         getUsers: [User]
         getAUser(username: String!) : User
+        #        getting Messages
+        chats: [Chat]
     }
 
     type Mutation {
@@ -55,5 +63,11 @@ module.exports = gql`
         #        set other user var
         setExtraUserFields(extraFields: ExtraFieldinputs) : User
         confirmEmail(token: String): Boolean
+        #        sending messages
+        sendMessage(from: String!, message: String!) : Chat
+    }
+
+    type Subscription {
+        messageSent: Chat
     }
 `
