@@ -7,7 +7,7 @@ const sgMail = require('@sendgrid/mail')
 const SECRET_KEY = process.env.SECRET_KEY
 const EMAIL_KEY = process.env.EMAIL_VER_KEY
 const EMAIL_SECRET = process.env.EMAIL_SECRET
-
+const EMAIL_SENDER = process.env.EMAIL_SENDER
 const User = require('../models/User')
 sgMail.setApiKey(EMAIL_KEY)
 
@@ -127,8 +127,8 @@ module.exports = {
             // sending verification email
             const msg = {
                 to: email, // Change to your recipient
-                from: 'gymbud_admin@zohomail.com', // Change to your verified sender
-                subject: 'Email Verification for Gym Bud!',
+                from: EMAIL_SENDER, // Change to your verified sender
+                subject: 'Email Verification for GymPanions!',
                 text: `Click the link below to verify your Calpoly email address!
                         link: http://${req.headers.host}/verify/${emailToken}`,
                 html: '<strong>and easy to do anywhere, even with Node.js</strong>' +
