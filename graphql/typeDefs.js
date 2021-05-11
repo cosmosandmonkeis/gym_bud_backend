@@ -26,9 +26,12 @@ module.exports = gql`
     }
 
     type Chat {
+        #        this could use improvement in the future to take type ID
         id: ID
         from: String!
         message: String!
+        to: String!
+        created_at: String!
     }
 
     input RegisterInput {
@@ -53,7 +56,7 @@ module.exports = gql`
         getUsers: [User]
         getAUser(username: String!) : User
         #        getting Messages
-        chats: [Chat]
+        chats(otherUser: String!): [Chat]
     }
 
     type Mutation {
@@ -64,10 +67,10 @@ module.exports = gql`
         setExtraUserFields(extraFields: ExtraFieldinputs) : User
         confirmEmail(token: String): Boolean
         #        sending messages
-        sendMessage(from: String!, message: String!) : Chat
+        sendMessage(from: String!, to: String!, message: String!) : Boolean
     }
 
     type Subscription {
-        messageSent: Chat
+        messageSent(to: String!): Chat
     }
 `
