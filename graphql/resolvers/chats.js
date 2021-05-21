@@ -1,11 +1,11 @@
 const Chat = require('../models/Chat')
-
+const User = require('../models/User')
 
 module.exports = {
     Query: {
-        async chats() {
+        async chats(_, {otherUser}) {
             try {
-                return await Chat.find()
+                return await Chat.find({from: otherUser})
             } catch (err) {
                 throw new Error(err)
             }
@@ -14,26 +14,31 @@ module.exports = {
     ,
     Mutation: {
         // sendMessage(from: String!, message: String!) : Chat
-        async sendMessage(_, {from, message}, context) {
+        async sendMessage(_, {from, to, message}, context) {
             try {
                 const newchat = new Chat({
                     from,
-                    message
+                    message,
+                    to,
+                    createdAt: new Date().toISOString()
                 })
-                const res = await newchat.save()
-                console.log(res)
-                context.pubsub.publish('CHAT_CHANNEL', {
+                await newchat.save()
+                await User.findOneAndUpdate({username: from}, {
+                    $addToSet: {contacts: [to]}
+                })
+                await context.pubsub.publish('NEW_MESSAGE', {
                     messageSent: newchat
                 })
-                return newchat
+                return true
             } catch (e) {
-                throw new Error(e)
+                console.log(e)
+                return false
             }
         }
     },
     Subscription: {
-        messageSent: {
-            subscribe: (_, __, { pubsub }) => pubsub.asyncIterator('CHAT_CHANNEL')
+        newMessage: {
+            subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(['NEW_MESSAGE'])
         }
     }
 

@@ -23,6 +23,7 @@ module.exports = gql`
         goalPreference: String
         #        how many times a week is the user looking to go to the gym
         frequencyPreference: Int
+        contacts: [String]
     }
 
     type Chat {
@@ -31,7 +32,7 @@ module.exports = gql`
         from: String!
         message: String!
         to: String!
-        created_at: String!
+        createdAt: String!
     }
 
     input RegisterInput {
@@ -71,6 +72,6 @@ module.exports = gql`
     }
 
     type Subscription {
-        messageSent(to: String!): Chat
+        newMessage: Chat
     }
 `

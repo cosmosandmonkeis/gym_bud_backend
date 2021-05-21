@@ -13,7 +13,8 @@ const userSchema = new Schema({
     gymName: String,
     genderPreference: String,
     goalPreference: String,
-    frequencyPreference: Number
+    frequencyPreference: Number,
+    contacts: [String]
 
 })
 
