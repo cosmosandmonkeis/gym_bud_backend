@@ -132,7 +132,8 @@ module.exports = {
                 text: `Click the link below to verify your Calpoly email address!
                         link: http://${req.headers.host}/verify/${emailToken}`,
                 html: '<strong>Click the link to verify your Calpoly GymPanion account: </strong>' +
-                    `<a href="http://${req.headers.host}/verify/${emailToken}">Verify</a>`,
+                    // `<a href="http://${req.headers.host}/verify/${emailToken}">Verify</a>`,
+                    `<a href="http://localhost:3000/verify/${emailToken}">Verify</a>`,
             }
 
             await sgMail
@@ -143,7 +144,6 @@ module.exports = {
                 .catch((error) => {
                     console.error(error)
                 })
-            console.log(msg.text)
 
             return {
                 ...res._doc,
