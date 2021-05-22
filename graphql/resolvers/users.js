@@ -51,7 +51,14 @@ module.exports = {
                 throw new UserInputError('User not found')
             }
         },
-
+        async getUsersContacts(_, {username}) {
+            try {
+                const res = await User.findOne({username}).select('contacts')
+                return res.contacts
+            } catch (e) {
+                throw new Error(e)
+            }
+        }
     }
     ,
     Mutation: {

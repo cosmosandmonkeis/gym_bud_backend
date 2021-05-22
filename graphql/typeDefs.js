@@ -56,6 +56,7 @@ module.exports = gql`
         #        User Queries
         getUsers: [User]
         getAUser(username: String!) : User
+        getUsersContacts(username: String): [String]
         #        getting Messages
         chats(otherUser: String!): [Chat]
     }
