@@ -131,7 +131,7 @@ module.exports = {
                 subject: 'Email Verification for GymPanions!',
                 text: `Click the link below to verify your Calpoly email address!
                         link: http://${req.headers.host}/verify/${emailToken}`,
-                html: '<strong>and easy to do anywhere, even with Node.js</strong>' +
+                html: '<strong>Click the link to verify your Calpoly GymPanion account: </strong>' +
                     `<a href="http://${req.headers.host}/verify/${emailToken}">Verify</a>`,
             }
 
